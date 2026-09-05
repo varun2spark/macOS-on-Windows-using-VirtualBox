@@ -18,6 +18,7 @@
 
 </div>
 
+<a id="disclaimer"></a>
 > [!CAUTION]
 > ### ⚠️ Disclaimer & Legal Notice
 >
@@ -38,54 +39,32 @@
 
 ---
 
+<a id="navigation-matrix"></a>
 ## 🧭 Navigation Matrix
 
-<table>
-  <tr>
-    <td align="center" width="25%">
-      <a href="#-system-prerequisites"><b>📋 Prerequisites</b></a><br>
-      <sub>Hardware & Environment</sub>
-    </td>
-    <td align="center" width="25%">
-      <a href="#-step-1--virtualbox--extension-pack"><b>⚙️ Step 1</b></a><br>
-      <sub>VirtualBox Setup</sub>
-    </td>
-    <td align="center" width="25%">
-      <a href="#-step-2--obtain-installation-media"><b>💿 Step 2</b></a><br>
-      <sub>Media Preparation</sub>
-    </td>
-    <td align="center" width="25%">
-      <a href="#-step-3--system-virtualization-tweaks"><b>🛡️ Step 3</b></a><br>
-      <sub>Security & Hyper-V</sub>
-    </td>
-  </tr>
-  <tr>
-    <td align="center" width="25%">
-      <a href="#-step-4--create-the-virtual-machine"><b>🖥️ Step 4</b></a><br>
-      <sub>VM Provisioning</sub>
-    </td>
-    <td align="center" width="25%">
-      <a href="#-step-5--configure-vm-parameters"><b>🎛️ Step 5</b></a><br>
-      <sub>Hardware Settings</sub>
-    </td>
-    <td align="center" width="25%">
-      <a href="#-step-6--apply-efi--smc-patching"><b>💻 Step 6</b></a><br>
-      <sub>VBoxManage Patches</sub>
-    </td>
-    <td align="center" width="25%">
-      <a href="#-step-7--macos-installation-flow"><b>🚀 Step 7</b></a><br>
-      <sub>Installation & Setup</sub>
-    </td>
-  </tr>
-</table>
-
 <div align="center">
-  <a href="#-bonus--display-resolution-tuning"><b>✨ Bonus: Resolution Tuning</b></a> &nbsp;•&nbsp;
-  <a href="#-troubleshooting--diagnostic-matrix"><b>🛠️ Troubleshooting</b></a>
+
+| 📋 [Prerequisites](#prerequisites) | ⚙️ [Step 1: VirtualBox](#step-1) | 💿 [Step 2: Media Prep](#step-2) | 🛡️ [Step 3: Security / Hyper-V](#step-3) |
+| :---: | :---: | :---: | :---: |
+| <sub>Hardware & RAM Requirements</sub> | <sub>Install Hypervisor & ExtPack</sub> | <sub>Legal Media Guidelines</sub> | <sub>HVCI & Hypervisor Tweaks</sub> |
+
+| 🖥️ [Step 4: Provision VM](#step-4) | 🎛️ [Step 5: Hardware Settings](#step-5) | 💻 [Step 6: EFI / SMC Patch](#step-6) | 🚀 [Step 7: macOS Setup](#step-7) |
+| :---: | :---: | :---: | :---: |
+| <sub>Base VM Creation</sub> | <sub>EFI, Display & Network Config</sub> | <sub>VBoxManage Command Scripts</sub> | <sub>Disk Utility & OOBE</sub> |
+
+<br>
+
+<p align="center">
+  <a href="#bonus"><b>✨ Bonus: Display Resolution Tuning</b></a> &nbsp;•&nbsp;
+  <a href="#troubleshooting"><b>🛠️ Troubleshooting Matrix</b></a> &nbsp;•&nbsp;
+  <a href="#disclaimer"><b>⚠️ Legal Disclaimer</b></a>
+</p>
+
 </div>
 
 ---
 
+<a id="prerequisites"></a>
 ## 📊 System Prerequisites
 
 Ensure your host rig meets the required resource allocations before proceeding:
@@ -101,11 +80,12 @@ Ensure your host rig meets the required resource allocations before proceeding:
 > [!NOTE]
 > Hardware virtualization (`Intel VT-x` or `AMD-V / SVM`) must be enabled in your host system's BIOS/UEFI settings.
 
+<div align="right"><sub><a href="#navigation-matrix">↑ Back to Navigation Matrix</a></sub></div>
+
 ---
 
-## 🚀 Installation & Provisioning Walkthrough
-
-### 📦 Step 1 — VirtualBox & Extension Pack
+<a id="step-1"></a>
+## 📦 Step 1 — VirtualBox & Extension Pack
 
 1. Navigate to the official [Oracle VirtualBox Downloads](https://www.virtualbox.org/wiki/Downloads) portal.
 2. Download the **Windows hosts** binary installer.
@@ -113,9 +93,12 @@ Ensure your host rig meets the required resource allocations before proceeding:
 4. Run the VirtualBox installer and complete standard setup.
 5. Double-click the `.vbox-extpack` file to register extension modules with the hypervisor.
 
+<div align="right"><sub><a href="#navigation-matrix">↑ Back to Navigation Matrix</a></sub></div>
+
 ---
 
-### 💿 Step 2 — Obtain Installation Media
+<a id="step-2"></a>
+## 💿 Step 2 — Obtain Installation Media
 
 This repository **does not host, distribute, or provide download links to macOS installation images**.
 
@@ -128,19 +111,22 @@ You will need a **legally obtained macOS Big Sur (11.7) `.iso` installation imag
 
 *Why Big Sur?* macOS Big Sur (11.7) offers optimal compatibility with standard VirtualBox EFI emulation compared to later releases.
 
+<div align="right"><sub><a href="#navigation-matrix">↑ Back to Navigation Matrix</a></sub></div>
+
 ---
 
-### 🛡️ Step 3 — System Virtualization Tweaks
+<a id="step-3"></a>
+## 🛡️ Step 3 — System Virtualization Tweaks
 
 > [!WARNING]
 > Disabling Windows Memory Integrity (Hypervisor-Protected Code Integrity / HVCI) is a **security trade-off**. It reduces some host platform protections in order to prevent hypervisor conflicts. Only modify these settings if you accept this trade-off, and consider re-enabling them when your testing concludes.
 
-#### 3.1 Disable Memory Integrity (Core Isolation)
+### 3.1 Disable Memory Integrity (Core Isolation)
 1. Open Windows Search (`Win + S`), type **Core Isolation**, and press `Enter`.
 2. Toggle **Memory Integrity** to **Off**.
 3. Reboot your system when prompted.
 
-#### 3.2 Disable Windows Hyper-V
+### 3.2 Disable Windows Hyper-V
 Launch **Command Prompt as Administrator** (`Win + S` → `cmd` → right-click → *Run as Administrator*) and execute:
 
 ```cmd
@@ -149,9 +135,12 @@ bcdedit /set hypervisorlaunchtype off
 
 *Restart your PC once more to enforce configuration changes.*
 
+<div align="right"><sub><a href="#navigation-matrix">↑ Back to Navigation Matrix</a></sub></div>
+
 ---
 
-### 🖥️ Step 4 — Create the Virtual Machine
+<a id="step-4"></a>
+## 🖥️ Step 4 — Create the Virtual Machine
 
 Launch VirtualBox and click **New** (`Ctrl + N`):
 
@@ -170,9 +159,12 @@ Launch VirtualBox and click **New** (`Ctrl + N`):
 
 </div>
 
+<div align="right"><sub><a href="#navigation-matrix">↑ Back to Navigation Matrix</a></sub></div>
+
 ---
 
-### 🎛️ Step 5 — Configure VM Parameters
+<a id="step-5"></a>
+## 🎛️ Step 5 — Configure VM Parameters
 
 Open your VM's **Settings** (`Ctrl + S`) and apply the following matrix:
 
@@ -208,9 +200,12 @@ Open your VM's **Settings** (`Ctrl + S`) and apply the following matrix:
   </tbody>
 </table>
 
+<div align="right"><sub><a href="#navigation-matrix">↑ Back to Navigation Matrix</a></sub></div>
+
 ---
 
-### 💻 Step 6 — Apply EFI & SMC Patching
+<a id="step-6"></a>
+## 💻 Step 6 — Apply EFI & SMC Patching
 
 > [!IMPORTANT]
 > **Completely close VirtualBox before running these commands.** The background service (`VBoxSVC.exe`) must not be holding VM configuration locks.
@@ -254,9 +249,12 @@ VBoxManage.exe setextradata "macOS-BigSur" "VBoxInternal/Devices/smc/0/Config/Ge
 
 > 💡 *Replace `"macOS-BigSur"` with your exact VM identifier if you named it differently.*
 
+<div align="right"><sub><a href="#navigation-matrix">↑ Back to Navigation Matrix</a></sub></div>
+
 ---
 
-### 🚀 Step 7 — macOS Installation Flow
+<a id="step-7"></a>
+## 🚀 Step 7 — macOS Installation Flow
 
 1. **Boot:** Launch VirtualBox and click **Start**. Allow the installer environment to load.
 2. **Disk Initialization:**
@@ -275,8 +273,11 @@ VBoxManage.exe setextradata "macOS-BigSur" "VBoxInternal/Devices/smc/0/Config/Ge
 4. **Out-of-Box Experience (OOBE):**
    - Follow standard setup prompts to configure region, accessibility, local user accounts, and theme preferences.
 
+<div align="right"><sub><a href="#navigation-matrix">↑ Back to Navigation Matrix</a></sub></div>
+
 ---
 
+<a id="bonus"></a>
 ## ✨ Bonus — Display Resolution Tuning
 
 VirtualBox defaults virtual displays to **1024×768**. You can inject custom EFI resolutions while the VM is **powered down**.
@@ -301,8 +302,11 @@ VBoxManage.exe modifyvm "macOS-BigSur" --vram 256
 > [!TIP]
 > Toggle seamless full-screen mode anytime via `Host Key + F` (Default Host Key is Right `Ctrl`).
 
+<div align="right"><sub><a href="#navigation-matrix">↑ Back to Navigation Matrix</a></sub></div>
+
 ---
 
+<a id="troubleshooting"></a>
 ## 🛠️ Troubleshooting & Diagnostic Matrix
 
 <details open>
@@ -320,8 +324,11 @@ VBoxManage.exe modifyvm "macOS-BigSur" --vram 256
 
 </details>
 
+<div align="right"><sub><a href="#navigation-matrix">↑ Back to Navigation Matrix</a></sub></div>
+
 ---
 
+<a id="community"></a>
 <div align="center">
 
 ### 🌟 Community & Collaboration
