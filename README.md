@@ -221,12 +221,19 @@ Open **Command Prompt as Administrator** and apply the commands corresponding to
 ```cmd
 cd "C:\Program Files\Oracle\VirtualBox"
 
-VBoxManage.exe modifyvm "macOS-BigSur" --cpuidset 00000001 000106e5 00100800 0098e3fd bfebfbff
-VBoxManage.exe setextradata "macOS-BigSur" "VBoxInternal/Devices/efi/0/Config/DmiSystemProduct" "iMac19,1"
-VBoxManage.exe setextradata "macOS-BigSur" "VBoxInternal/Devices/efi/0/Config/DmiSystemVersion" "1.0"
-VBoxManage.exe setextradata "macOS-BigSur" "VBoxInternal/Devices/efi/0/Config/DmiBoardProduct" "Mac-AA95B1DDAB278B95"
-VBoxManage.exe setextradata "macOS-BigSur" "VBoxInternal/Devices/smc/0/Config/DeviceKey" "ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc"
-VBoxManage.exe setextradata "macOS-BigSur" "VBoxInternal/Devices/smc/0/Config/GetKeyFromRealSMC" 1
+VBoxManage.exe modifyvm "VM Name" --cpuidset 00000001 000106e5 00100800 0098e3fd bfebfbff
+
+VBoxManage setextradata "VM Name" "VBoxInternal/Devices/efi/0/Config/DmiSystemProduct" "iMac19,3"
+
+VBoxManage setextradata "VM Name" "VBoxInternal/Devices/efi/0/Config/DmiSystemVersion" "1.0"
+
+VBoxManage setextradata "VM Name" "VBoxInternal/Devices/efi/0/Config/DmiBoardProduct" "Iloveapple"
+
+VBoxManage setextradata "VM Name" "VBoxInternal/Devices/smc/0/Config/DeviceKey" "ourhardworkbythesewordsguardedpleasedontsteal(c)AppleComputerInc"
+
+VBoxManage setextradata "VM Name" "VBoxInternal/Devices/smc/0/Config/GetKeyFromRealSMC" 0
+
+VBoxManage setextradata "VM Name" "VBoxInternal/TM/TSCMode" "RealTSCOffset"
 ```
 
 </details>
