@@ -286,10 +286,10 @@ VirtualBox defaults virtual displays to **1024×768**. You can inject custom EFI
 cd "C:\Program Files\Oracle\VirtualBox"
 
 :: Inject standard 1080p Full HD resolution
-VBoxManage.exe setextradata "macOS-BigSur" VBoxInternal2/EfiGraphicsResolution 1920x1080
+VBoxManage.exe setextradata "VM-Name" VBoxInternal2/EfiGraphicsResolution 1920x1080
 
 :: (Optional) Expand Video RAM allocation to 256MB
-VBoxManage.exe modifyvm "macOS-BigSur" --vram 256
+VBoxManage.exe modifyvm "VM-Name" --vram 256
 ```
 
 | Display Standard | Resolution Setting Value |
