@@ -14,6 +14,14 @@
   A polished, step-by-step technical guide for developers and enthusiasts experimenting with macOS virtualization on x86-64 hardware.
 </p>
 
+<br>
+
+<p align="center">
+  <a href="https://youtu.be/BFiH-cCRMwM?si=K2Y0tWQFRnVOEUmx">
+    <img src="https://img.shields.io/badge/▶_Watch_Video_Tutorial-FF0000?style=for-the-badge&logo=youtube&logoColor=white" alt="YouTube Tutorial" />
+  </a>
+</p>
+
 ---
 
 </div>
